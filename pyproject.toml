@@ -1,0 +1,149 @@
+[project]
+name = "shodan-mcp"
+version = "0.1.0"
+description = "MCP server for AI-powered internet intelligence with Shodan. IP reconnaissance, device search, and CVE enrichment for AI agents."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.23.0",
+    "pydantic>=2.10.6",
+    "loguru>=0.7.0",
+    "httpx>=0.28.0",
+]
+license = {text = "Apache-2.0"}
+license-files = ["LICENSE"]
+
+authors = [
+    {name = "Vorota AI", email = "illia@vorota.ai"},
+]
+
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "shodan",
+    "internet-intelligence",
+    "reconnaissance",
+    "cve-lookup",
+    "security-automation",
+    "ai-security",
+    "penetration-testing",
+    "mcp-server",
+    "osint",
+    "vulnerability-intelligence",
+]
+
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Development Status :: 4 - Beta",
+    "Framework :: Pydantic :: 2",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/vorotaai/shodan-mcp"
+Repository = "https://github.com/vorotaai/shodan-mcp"
+Issues = "https://github.com/vorotaai/shodan-mcp/issues"
+Changelog = "https://github.com/vorotaai/shodan-mcp/blob/main/CHANGELOG.md"
+
+[project.scripts]
+"shodan-mcp" = "shodan_mcp.server:main"
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.2.2",
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.7",
+    "pyright>=1.1.398",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.26.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["shodan_mcp"]
+
+[tool.ruff]
+line-length = 99
+exclude = [
+    ".venv",
+    "**/__pycache__",
+    "**/dist",
+    "**/build",
+    "**/.ruff_cache",
+    "**/.venv",
+]
+force-exclude = true
+
+[tool.ruff.lint]
+exclude = ["__init__.py"]
+select = ["C", "D", "E", "F", "I", "W"]
+ignore = ["C901", "E501", "E741", "F402", "F823", "D100", "D106"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+no-sections = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "v$version"
+version_files = [
+    "pyproject.toml:version",
+    "shodan_mcp/__init__.py:__version__"
+]
+update_changelog_on_bump = true
+
+[tool.pytest.ini_options]
+markers = [
+    "live: marks tests that run actual Shodan API calls (deselect with '-m \"not live\"')",
+    "asyncio: marks tests that use asyncio",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.bandit]
+exclude_dirs = ["venv", "tests"]
+
+[tool.coverage.run]
+source = ["shodan_mcp"]
+
+[tool.pyright]
+exclude = [
+    "**/__pycache__",
+    ".venv",
+    "dist",
+    "build",
+]
+include = ["."]
+reportMissingImports = "none"
+reportMissingTypeStubs = false
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true

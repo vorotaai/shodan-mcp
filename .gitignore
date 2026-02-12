@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Ruff
+.ruff_cache/
+
+# Build artifacts
+*.egg-info/
+
+# Environment variables
+.env*
+
+# IDE config with potential secrets
+.cursor/
+
+# Private keys
+*.pem
+*.key
